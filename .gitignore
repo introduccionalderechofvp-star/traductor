@@ -1,0 +1,7 @@
+*.pdf
+*.log
+.cache/
+__pycache__/
+.venv/
+.env
+uploads/
