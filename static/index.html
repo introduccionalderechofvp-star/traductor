@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Traductor de PDFs</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div>
+        <h1>Traductor de PDFs</h1>
+        <p>Recorta por paginas y compara el texto original con la traduccion.</p>
+      </div>
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar modo oscuro">
+          Modo oscuro
+        </button>
+        <div class="status" id="status">Listo</div>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="controls" aria-label="Controles">
+        <label>
+          PDF
+          <select id="fileSelect"></select>
+        </label>
+
+        <div class="range-grid">
+          <label>
+            Desde
+            <input id="startPage" type="number" min="1" value="1" />
+          </label>
+          <label>
+            Hasta
+            <input id="endPage" type="number" min="1" value="1" />
+          </label>
+        </div>
+
+        <label>
+          Perfil
+          <select id="profileSelect">
+            <option value="it-legal-es">Italiano juridico -> espanol</option>
+            <option value="en-es">Ingles -> espanol</option>
+          </select>
+        </label>
+
+        <button id="extractButton" type="button">Extraer rango</button>
+        <button id="translateButton" type="button" disabled>Traducir rango</button>
+        <button id="downloadButton" type="button" disabled>Descargar traduccion</button>
+        <div class="progress" id="progressBox" hidden>
+          <div class="progress-top">
+            <span id="progressLabel">Trabajando</span>
+            <span id="progressDetail"></span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-bar"></div>
+          </div>
+        </div>
+        <div class="hint" id="documentInfo"></div>
+      </section>
+
+      <section class="workspace" aria-label="Comparacion">
+        <div class="pane">
+          <div class="pane-head">
+            <h2>PDF original</h2>
+            <div class="page-nav" aria-label="Navegacion de paginas">
+              <button id="prevPage" type="button" aria-label="Pagina anterior">&lt;</button>
+              <label class="compact-label">
+                Pagina
+                <input id="activePage" type="number" min="1" value="1" />
+              </label>
+              <button id="nextPage" type="button" aria-label="Pagina siguiente">&gt;</button>
+            </div>
+          </div>
+          <div class="pdf-pane" id="originalPane">
+            <div class="empty-state">Extrae un rango para ver aqui el PDF real.</div>
+          </div>
+        </div>
+
+        <div class="pane">
+          <div class="pane-head">
+            <h2>Traduccion</h2>
+            <span id="translationMeta">Simulada</span>
+          </div>
+          <div class="scroll-pane" id="translationPane"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
